@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% extend('layout') %>
+		<h1><%= title%></h1>
+		<p>
+			Welcome to Bryan's inventory management software. From this control
+			panel you can view stock levels, organise existing stock, as well as
+			add and delete new items and categories.
+		</p>
+		<h1>Your inventory currently has:</h1>
+		<ul>
+			<li><strong>Types of Item: <%=item_count%></strong></li>
+			<li>
+				<strong>Amount of all Items: <%= item_total%> </strong>
+			</li>
+			<li><strong>Categories: <%=category_count%></strong></li>
+		</ul>
+	</body>
+</html>

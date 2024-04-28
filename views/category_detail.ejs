@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=category.cat_name%></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% extend('layout')%> <%if(category.cat_img_url){%>
+		<img
+			src="<%=category.cat_img_url%>"
+			alt="Image of <%= category.cat_name%>"
+			style="width: 500px"
+		/>
+		<%}%>
+		<h1 style="display: inline"><%=category.cat_name%></h1>
+		<p style="display: inline">- <%=category.cat_desc%></p>
+		<h2>Items in Category:</h2>
+		<hr />
+		<%if(item_list.length){%>
+		<ul>
+			<%item_list.forEach(function(item){%>
+			<li>
+				<a href="<%=item.url%>"><%=item.item_name%></a>
+				(<%=item.item_desc%>)
+			</li>
+			<%})%>
+		</ul>
+		<%}else{%>
+		<p>This category has no items</p>
+		<%}%>
+		<hr />
+		<p>
+			<a href="<%=category.url+'/update'%>">Update Category</a>
+		</p>
+		<p>
+			<a href="<%=category.url+'/delete'%>">Delete Category</a>
+		</p>
+	</body>
+</html>

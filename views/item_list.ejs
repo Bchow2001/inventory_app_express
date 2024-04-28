@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%= title%></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% extend('layout') %>
+		<h1><%=title%></h1>
+		<%if(item_list.length){%>
+		<ul>
+			<%item_list.forEach(function(item){%>
+			<li>
+				<%if(item.item_img_url){%>
+				<img
+					src="<%=item.item_img_url%>"
+					alt="Image of <%= item.item_name%>"
+					style="width: 250px"
+				/>
+				<br />
+				<%}%>
+				<a href="<%=item.url%>"><%=item.item_name%></a>
+				<br />
+				(<%=(item.item_desc)%>)
+				<br />
+				<%if(item.category.length){%>
+				<span>Categories:</span>
+				<%item.category.forEach(function(category, index){%>
+				<a href="<%=category.url%>"><%=category.cat_name%></a>
+				<%if(index < item.category.length-1){%>, <%}})}else{%>
+				<span>Uncategorised Item</span>
+				<%}%>
+			</li>
+			<%})%>
+		</ul>
+		<%}else{%>
+		<p>There are no items currently in your inventory.</p>
+		<%}%>
+	</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<%extend('layout')%>
+		<h1><%=title%></h1>
+		<form action="" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="item_name">Item Name:</label>
+				<input
+					type="text"
+					id="item_name"
+					name="item_name"
+					class="form-control"
+					placeholder="Name of Item"
+					value='<%= null == item ? "" : item.item_name%>'
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="item_desc">Description:</label>
+				<textarea
+					name="item_desc"
+					id="item_desc"
+					class="form-control"
+					cols="30"
+					rows="10"
+					required
+				>
+<%= null == item ? "" : item.item_desc%></textarea
+				>
+			</div>
+			<div class="form-group">
+				<label for="item_price">Price:</label>
+				<input
+					type="number"
+					id="item_price"
+					name="item_price"
+					step="0.01"
+					class="form-control"
+					placeholder="Price of item"
+					value='<%= null == item ? "" : item.item_price%>'
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="item_stock">Item Stock Quantity:</label>
+				<input
+					type="number"
+					id="item_stock"
+					name="item_stock"
+					class="form-control"
+					placeholder="Stock Available"
+					value='<%= null == item ? "" : item.item_stock%>'
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label>Category</label>
+				<div>
+					<%categories.forEach(function(category){%>
+					<div style="display: inline; padding-right: 10px">
+						<%if(category.checked){%>
+						<input
+							type="checkbox"
+							name="category"
+							id="<%=category._id%>"
+							value="<%=category._id%>"
+							class="checkbox-input"
+							checked
+						/>
+						<%}else{%>
+						<input
+							type="checkbox"
+							name="category"
+							id="<%=category._id%>"
+							value="<%=category._id%>"
+							class="checkbox-input"
+						/>
+						<%}%>
+						<label for="<%=category._id%>"
+							><%=category.cat_name%></label
+						>
+						<%})%>
+					</div>
+				</div>
+			</div>
+            <div class="form-group">
+                <label for="item_img_url"
+					>Select image file (png, jpg accepted):</label
+				>
+				<input
+					type="file"
+					id="item_img_url"
+					name="item_img_url"
+					value='<%= null == item ? "" : item.item_img_url%>'
+					accept=".png, .jpg"
+				/>
+			</div>
+            </div>
+			<br />
+			<button class="btn btn-primary" type="submit" formnovalidate>
+				Submit
+			</button>
+		</form>
+		<%if(errors){%>
+		<ul>
+			<%errors.forEach(function(error){%>
+			<li><%=error.msg%></li>
+			<%})%>
+		</ul>
+		<%}%>
+	</body>
+</html>

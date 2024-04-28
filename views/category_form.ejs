@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<%extend ('layout')%>
+		<h1><%=title%></h1>
+		<form action="" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="cat_name">Category Name:</label>
+				<input
+					type="text"
+					id="cat_name"
+					name="cat_name"
+					class="form-control"
+					placeholder="Name of Category"
+					value='<%= null == category ? "" : category.cat_name%>'
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="cat_desc">Description:</label>
+				<textarea
+					name="cat_desc"
+					id="cat_desc"
+					class="form-control"
+					cols="30"
+					rows="10"
+					required
+				>
+<%= null == category ? "" : category.cat_desc%></textarea
+				>
+			</div>
+			<div class="form-group">
+				<label for="cat_img_url"
+					>Select image file (png, jpg accepted):</label
+				>
+				<input
+					type="file"
+					id="cat_img_url"
+					name="cat_img_url"
+					value='<%= null == category ? "" : category.cat_img_url%>'
+					accept=".png, .jpg"
+				/>
+			</div>
+			<button class="btn btn-primary">Submit</button>
+		</form>
+		<%if(errors){%>
+		<ul>
+			<%errors.forEach(function(error){%>
+			<li><%=error.msg%></li>
+			<%})%>
+		</ul>
+		<%}%>
+	</body>
+</html>

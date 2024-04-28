@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% extend('layout')%> <%if(item.item_img_url){%>
+		<img
+			src="<%=item.item_img_url%>"
+			alt="Image of <%= item.item_name%>"
+			style="width: 500px"
+		/>
+		<%}%>
+		<h1><%=item.item_name%></h1>
+		<h2>
+			<%if(item.category.length){%>
+			<strong>Categories: </strong>
+			<%item.category.forEach(function(cat, index){%>
+			<a href="<%=cat.url%>"><%=cat.cat_name%></a>
+			<%if(index < item.category.length-1){%> , <%}})}else{%>
+			<span>Uncategorised item</span>
+			<%}%>
+		</h2>
+		<p>Price: £<%=item.item_price%></p>
+		<p>Description: <%=item.item_desc%></p>
+		<p>Unique ID: <%=item._id%></p>
+		<hr />
+		<div style="margin-left: 20px; margin-top: 20px">
+			<h3>
+				Quantity Available: <%if (item.item_stock >= 30){%>
+				<p style="color: green; display: inline">
+					<%=item.item_stock%>
+				</p>
+				<%}else if (item.item_stock > 0){%>
+				<p style="color: orangered; display: inline">
+					<%=item.item_stock%>
+				</p>
+				<%}else {%>
+				<p style="color: red; display: inline"><%=item.item_stock%></p>
+				<%}%>
+			</h3>
+		</div>
+		<p>Do you really want to delete this item?</p>
+		<form action="" method="post">
+			<div class="form-group">
+				<input
+					type="hidden"
+					id="itemid"
+					name="itemid"
+					value="<%=item._id%>"
+					class="form-control"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="password">Password to Delete:</label>
+				<input
+					type="password"
+					id="password"
+					name="password"
+					class="form-control"
+				/>
+			</div>
+			<button class="btn btn-primary" type="submit">Delete</button>
+		</form>
+		<%if(incorrect){%>
+		<p>Password was incorrect please try again.</p>
+		<%}%>
+	</body>
+</html>

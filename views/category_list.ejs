@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% extend('layout')%>
+		<h1><%=title%></h1>
+		<%if(category_list.length){%>
+		<ul>
+			<%category_list.forEach(function(category){%>
+			<li>
+				<%if(category.cat_img_url){%>
+				<img
+					src="<%=category.cat_img_url%>"
+					alt="Image of <%= category.cat_name%>"
+					style="width: 250px"
+				/>
+				<br />
+				<%}%>
+				<a href="<%=category.url%>"><%=category.cat_name%></a>
+				<br />
+				(<%=(category.cat_desc)%>)
+				<br />
+			</li>
+			<%})%>
+		</ul>
+		<%}else{%>
+		<p>There are no categories in your inventory</p>
+		<%}%>
+	</body>
+</html>
